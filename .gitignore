@@ -1,0 +1,9 @@
+.DS_Store
+.funcignore
+cropped_images/
+images/
+labels/
+models/
+videos/
+.vscode/
+__pycache__/
