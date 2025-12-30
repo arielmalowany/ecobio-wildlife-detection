@@ -6,5 +6,4 @@ labels/
 models/
 videos/
 .vscode/
-ecobio_labels/
 __pycache__/
