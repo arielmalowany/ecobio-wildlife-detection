@@ -21,6 +21,19 @@ def save_json(json_file, file_name, save_dir = '/kaggle/working/extracted_images
   with open(file_dir, 'w') as f:
     yolo_metadata = json.dumps(json_file)
     f.write(yolo_metadata)
+    
+def write_timestamps(file_name, frame_num, time_seconds):
+  
+  minutes = int(time_seconds // 60)
+  seconds = int(time_seconds % 60)
+  
+  if minutes > 0:
+     time_str = f"{minutes} minute{'s' if minutes != 1 else ''} {seconds} second{'s' if seconds != 1 else ''}"
+  else:
+     time_str = f"{seconds} second{'s' if seconds != 1 else ''}"
+  
+  with open(f"./cropped_images/{file_name}/minutos_con_objetos.txt", "a") as file:
+    file.write(f"Frame {frame_num} -> {time_str}\n")
 
 def open_video(file_path):
   cap = cv2.VideoCapture(file_path)
@@ -32,16 +45,19 @@ def open_video(file_path):
 
 def extract_frame(cap_obj, frame_number=1, save_img=False, save_path=None):
     cap_obj.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+    fps = cap_obj.get(cv2.CAP_PROP_FPS)
+    time_seconds = frame_number / fps   
+    
     ret, frame = cap_obj.read()
     
     if not ret:
         print(f"No fue posible extraer el frame {frame_number}")
-        return None
+        return None, None
 
     if save_img and save_path is not None:
         save_image(frame, save_path)
 
-    return frame
+    return frame, time_seconds
 
 def crop_and_save_image_train(array, detection_metadata, file_name, save_dir='./cropped_images', full_image = False, append = None):
     height, width = array.shape[:2]

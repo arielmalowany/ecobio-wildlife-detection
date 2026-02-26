@@ -1,0 +1,12 @@
+.DS_Store
+.funcignore
+cropped_images/
+images/
+labels/
+models/
+videos/
+.vscode/
+ecobio_labels/
+__pycache__/
+predicciones/
+minutos_con_objetos.txt

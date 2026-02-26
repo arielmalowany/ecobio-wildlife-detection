@@ -34,10 +34,11 @@ def crop_and_save_image(array, detection_metadata, file_name, frame_number, clas
         crop_img = array[y1:y2, x1:x2]
         append = f"{frame_number}_{idx_str}"
         if full_image:
-          to_save = array
-        else:
-          to_save = crop_img
-        save_image(to_save, file_name, append=append, save_dir=save_dir)
+          save_image(array, file_name, append = '_full_' + append, save_dir=save_dir)
+        to_save_obj = crop_img
+        
+        # Guardar la imagen para luego predecir, con el mismo nombre
+        save_image(to_save_obj, file_name, append=append, save_dir=save_dir)
 
         predictions = retrieve_prediction(file_name, str(frame_number), idx_str, classifier_model)
         if return_dict:
@@ -128,4 +129,4 @@ def final_predict(yolo_metadata, speciesnet_preds):
     if prediction in {'domestic_cat', 'fox', 'squirrel'}:
         prediction = 'unknown_animal'
 
-    return prediction
+    return prediction, 
