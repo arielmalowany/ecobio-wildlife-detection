@@ -1,5 +1,11 @@
 ## Introducción ## 
 
+## Streamlit App ## 
+
+Para poder utilizar la herramienta de manera interactiva, basta con descargar el repositorio, ubicar los pesos de los modelos en la carpeta de models, y ejecutar el archivo Iniciar_EcoBio_Windows.bat para usuarios de Windows, o Iniciar_EcobBio_Mac_Linux.sh en el caso de Mac/Linux.
+
+## Notebook de inferencia ## 
+
 El notebook de Inference recibe un video y realiza todos los pasos para devolver una predicción.
 
 Utiliza un modelo de detección `megadetector 5.0.28` finetuneado utlizando el conjunto de datos de fauna uruguaya creado por Ambá y Tryolabs, publicado en [Kaggle](https://www.kaggle.com/competitions/cupybara/data). El clasificador es `speciesnet 5.0.0.`
